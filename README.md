@@ -1,8 +1,8 @@
 # Bitcoin Transaction Corpus #
 
-This is a collection of bitcoin transactions, taken from running 4
-full bitcoin nodes with a patch to annotate transactions.  It's
-licensed under BSD-MIT.
+This is a collection of bitcoind mempools, taken from running 4 full
+bitcoin nodes with a patch to annotate transactions.  It's licensed
+under BSD-MIT.
 
 ## How To Decode It ##
 
@@ -31,6 +31,10 @@ You can simply uncompress the corpora and load them directly into C
 arrays.  See example/simple-analysis.c.
 
 ## Using the Data ##
+
+You will usually need a full bitcoind (ie. with txindex) to actually
+get the transaction contents from the hash (ie. bitcoin-cli
+getrawtransaction).  To save space, they're not included here.
 
 It takes about a day for the memory pool to reach steady state so
 usually you will want to use the data from block 352305.

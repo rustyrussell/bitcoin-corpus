@@ -39,7 +39,7 @@ getrawtransaction).  To save space, they're not included here.
 It takes about a day for the memory pool to reach steady state so
 usually you will want to use the data from block 352305.
 
-There are three orphaned blocks in the data set:
+There are four orphaned blocks in the data set:
 
 1) Blockheight 352560
    Coinbase 33db9755662f6b4a46dfe26a1d65ba00c4e1a2a9f1db190e711c61e4bcd060d7
@@ -50,6 +50,23 @@ There are three orphaned blocks in the data set:
 3) Blockheight 352548
    Coinbase a01b5e45d3624bc0265fb8ab81bb996bf4ffd46ddde45e083fc73e334e776e0d
       This is only in the sf dataset.
+4) Blockheight 353014
+   Coinbase 830178aa3b5bfffa0d8e2dc39def5d3e99029ca50aafc5c172e4556f9ac46d1e
+       This is in the sf-rn and au datasets.
+
+In addition, six transactions vanish from the sf-rn and au mempools
+after the non-orphan 353014: presumably because they spent
+transactions in the orphan.  If you are trying to track mempools, you
+should remove the following after the non-orphan 353014 (you can
+remove them unconditionally, since they don't appear on the other
+nodes):
+
+  037b4eadf63584764870bb055a2a8e755145e27a97490f46ede6db841114e14e
+  2dbb81d73a6d9de85f2b78bcac7e350407a3e737f8d5da7ef1fe9338795fb0cc
+  989897cac0115001c75d4913ca081b6263de487d20f70b03fcfa1b469144ad39
+  82f5569c49461bbf1b67a1c7ba09c3a051292f86a5f97f7198ef364436e16dc0
+  0ccd98b6940795add4bd221eac95de8f8dd92c0f2f5733032d3672d531a5d02a
+  a26ba9c7ebeaebaeb98783c5133e55febc75e4e28945a886c4bc1a94a7cd9260
 
 ## How It Was Collected ##
 

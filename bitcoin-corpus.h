@@ -43,7 +43,8 @@ static inline bool corpus_maybe_orphan(size_t blocknum)
 }
 
 /* We identify orphaned blocks by coinbase. */
-static inline bool corpus_orphaned_coinbase(const struct corpus_entry *e)
+static inline bool corpus_orphaned_coinbase(size_t blocknum,
+					    const struct corpus_txid *coinbase)
 {
 	static struct corpus_txid orphan_352802
 		= { { 0x79, 0xb1, 0xc3, 0x09, 0xab, 0x8a, 0xb9, 0x2b,
@@ -66,15 +67,12 @@ static inline bool corpus_orphaned_coinbase(const struct corpus_entry *e)
 		      0x99, 0x02, 0x9c, 0xa5, 0x0a, 0xaf, 0xc5, 0xc1,
 		      0x72, 0xe4, 0x55, 0x6f, 0x9a, 0xc4, 0x6d, 0x1e } };
 
-	if (corpus_entry_type(e) != COINBASE)
+	if (!corpus_maybe_orphan(blocknum))
 		return false;
 
-	if (!corpus_maybe_orphan(corpus_blocknum(e)))
-		return false;
-
-	return memcmp(&orphan_352802, &e->txid, sizeof(e->txid)) == 0
-		|| memcmp(&orphan_352548, &e->txid, sizeof(e->txid)) == 0
-		|| memcmp(&orphan_352560, &e->txid, sizeof(e->txid)) == 0
-		|| memcmp(&orphan_353014, &e->txid, sizeof(e->txid)) == 0;
+	return memcmp(&orphan_352802, coinbase, sizeof(*coinbase)) == 0
+		|| memcmp(&orphan_352548, coinbase, sizeof(*coinbase)) == 0
+		|| memcmp(&orphan_352560, coinbase, sizeof(*coinbase)) == 0
+		|| memcmp(&orphan_353014, coinbase, sizeof(*coinbase)) == 0;
 }
 #endif /* BITCOIN_CORPUS_H */
